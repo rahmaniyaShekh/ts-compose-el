@@ -1,6 +1,8 @@
 package com.aipg.composets
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -12,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -59,7 +62,7 @@ fun MyBasicComponentsApp() {
             SectionTitle("Button Examples")
             SimpleButton()
             OutlinedButtonExample()
-            TextButtonExample()
+            TextButtonExample(context = LocalContext.current)
             DisabledButton()
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -113,8 +116,10 @@ fun OutlinedButtonExample() {
 }
 
 @Composable
-fun TextButtonExample() {
-    TextButton(onClick = { /* Handle click */ }) {
+fun TextButtonExample(context: Context) {
+    TextButton(onClick = {
+        Toast.makeText(context, "Text Button Clicked", Toast.LENGTH_SHORT).show()
+    }) {
         Text("Text Button")
     }
 }
